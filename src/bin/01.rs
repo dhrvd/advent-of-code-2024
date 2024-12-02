@@ -16,7 +16,11 @@ pub fn part_one(input: &str) -> Option<u32> {
     left.sort();
     right.sort();
 
-    let total_distance = left.iter().zip(right.iter()).map(|(l, r)|l.abs_diff(*r)).sum();
+    let total_distance = left
+        .iter()
+        .zip(right.iter())
+        .map(|(l, r)| l.abs_diff(*r))
+        .sum();
 
     Some(total_distance)
 }
@@ -29,10 +33,15 @@ pub fn part_two(input: &str) -> Option<u32> {
         let mut parts = line.split_whitespace();
 
         left.push(parts.next().unwrap().parse().unwrap());
-        *right_freq.entry(parts.next().unwrap().parse().unwrap()).or_default() += 1;
+        *right_freq
+            .entry(parts.next().unwrap().parse().unwrap())
+            .or_default() += 1;
     }
 
-    let similarity_score: u32 = left.iter().map(|l| l * right_freq.get(l).unwrap_or(&0)).sum();
+    let similarity_score: u32 = left
+        .iter()
+        .map(|l| l * right_freq.get(l).unwrap_or(&0))
+        .sum();
 
     Some(similarity_score)
 }
